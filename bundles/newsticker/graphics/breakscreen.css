@@ -7,7 +7,7 @@ body {
     overflow: hidden;
 }
 
-div, marquee {
+div {
     position: absolute;
 }
 
