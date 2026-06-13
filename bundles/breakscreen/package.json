@@ -1,0 +1,23 @@
+{
+    "name": "breakscreen",
+    "version": "0.0.0",
+    "nodecg": {
+        "compatibleRange": "^2.6.4", 
+        "graphics": [
+            {
+                "file": "breakscreen.html",
+                "width": 1920,
+                "height": 1080
+            }
+        ],
+        "dashboardPanels": [
+            {
+                "name": "breakscreen-dash",
+                "title": "Break Screen Info",
+                "width": 5,
+                "file": "dashboard.html",
+                "headerColor": "#525F78"
+            }
+        ]
+    }
+}

@@ -1,0 +1,115 @@
+body {
+    font-family: "Bebas Neue";
+    color: #303030;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+div, marquee {
+    position: absolute;
+}
+
+#maincontainer {
+    left: 0px;
+    top: 810px;
+    width: 1920px;
+    height: 270px;
+    background-image: url("Bottom Panel.png");
+}
+
+#streamtitle {
+    left: 24px;
+    top: 8px;
+    width: 750px;
+    height: 90px;
+    vertical-align: center;
+    font-size: 64px;
+    font-family: "Rubik Dirt";
+    color: #ffffff;
+}
+
+#headline {
+    left: 24px;
+    top: 75px;
+    width: 1356px;
+    height: 120px;
+    vertical-align: top;
+    font-size: 128px;
+}
+
+#countdowncontainer {
+    left: 1380px;
+    top: 90px;
+    width: 360px;
+    height: 180px;
+}
+
+#countdowntitle {
+    top: 4px;
+    width: 100%;
+    height: 24px;
+    vertical-align: top;
+    text-align: center;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+#countdown {
+    top: 32px;
+    width: 100%;
+    height: 100%;
+    vertical-align: center;
+    text-align: center;
+    font-size: 108px;
+    font-family: "Rubik Dirt";
+    color: #ffffff;
+}
+
+#tickercontainer {
+    left: 0;
+    top: 202px;
+    width: 1380px;
+    height: 65px;
+    font-size: 64px;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+#ticker1 {
+    animation: marquee 20s linear infinite;
+}
+
+#ticker2 {
+    animation: marquee2 20s linear infinite;
+}
+
+.ticker {
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.ticker span {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+@keyframes marquee2 {
+    0% {
+        transform: translate3d(100%, 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
