@@ -1,0 +1,129 @@
+body {
+    font-family: "Bebas Neue";
+    color: #303030;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+div {
+    position: absolute;
+}
+
+#maincontainer {
+    left: 1530px;
+    top: 0px;
+    width: 390px;
+    height: 882px;
+    background-image: url("Side Panel.png");
+}
+
+#nextlobbycontainer {
+    top: 0px;
+    width: 100%;
+    height: 240px;
+    color: #ffffff;
+}
+
+#nextlobby {
+    top: 0px;
+    width: 100%;
+    height: 72px;
+    text-align: center;
+    vertical-align: center;
+    font-family: "Rubik Dirt";
+    font-size: 48px;
+}
+
+.nextlobbyplayercol {
+    width: 195px;
+    text-align: center;
+}
+
+#nextlobbyplayerscol2 {
+    left:195px;
+}
+
+.nextlobbyplayer {
+    height: 42px;
+    width: 100%;
+    font-size: 26px;
+    text-align: center;
+    vertical-align: top;
+}
+
+#nextlobbyplayer1 {
+    left: 0px;
+    top: 72px;
+}
+
+#nextlobbyplayer3 {
+    left: 0px;
+    top: 114px;
+}
+
+#nextlobbyplayer5 {
+    left: 0px;
+    top: 156px;
+}
+
+#nextlobbyplayer7 {
+    left: 0px;
+    top: 198px;
+}
+
+#nextlobbyplayer2 {
+    left: 0px;
+    top: 72px;
+}
+
+#nextlobbyplayer4 {
+    left: 0px;
+    top: 114px;
+}
+
+#nextlobbyplayer6 {
+    left: 0px;
+    top: 156px;
+}
+
+#nextlobbyplayer8 {
+    left: 0px;
+    top: 198px;
+}
+
+.matchcontainer {
+    left: 0px;
+    width: 100%;
+    height: 144px;
+    text-align: center;
+}
+
+.matchcontainer div {
+    left: 38px;
+    width: 352px;
+    height: 72px;
+    font-size: 48px;
+    vertical-align: center;
+}
+
+.matchcontainer div.matchtime {
+    top: 0px;
+}
+
+.matchcontainer div.matchname {
+    top: 72px;
+}
+
+#match1container {
+    top: 280px;
+}
+
+#match2container {
+    top: 495px;
+}
+
+#match3container {
+    top: 710px;
+}
