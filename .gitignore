@@ -11,9 +11,11 @@ node_modules/
 !**/test/**/node_modules/
 npm-debug.log
 yarn-error.log
+package-lock.json
 
 # Local bundles
-/bundles/**
+# /bundles/**
+# We're going to be writing directly to this folder to save time
 
 # Datastores
 /db/**
