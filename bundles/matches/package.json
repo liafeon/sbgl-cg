@@ -6,8 +6,13 @@
         "graphics": [
             {
                 "file": "breakscreen-matchlist/breakscreen-matchlist.html",
-                "width": 1920,
-                "height": 1080
+                "width": 390,
+                "height": 882
+            },
+            {
+                "file": "singlematchresult/singlematchresult.html",
+                "width": 1200,
+                "height": 930
             }
         ],
         "dashboardPanels": [
