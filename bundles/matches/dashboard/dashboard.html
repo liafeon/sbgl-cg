@@ -1,7 +1,109 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style>
+            th, td {
+                padding-right: 16px;
+                text-align: center;
+            }
+            td.input {
+                margin: auto;
+            }
+            td.titlecontainer {
+                width: 180px;
+            }
+            td.timecontainer {
+                width: 180px;
+            }
+            td.idcontainer {
+                width: 120px;
+            }
+            td.fincontainer {
+                width: 60px;
+            }
+            td.spotlightcontainer {
+                width: 60px;
+            }
+
+        </style>
     </head>
     <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Time</th>
+                    <th>ID</th>
+                    <th>Finalized?</th>
+                    <th>Spotlight</th>
+                </tr>
+            </thead>
+            <tbody id="matchtable">
+                <tr class="matchrow" id="matchrow1">
+                    <td class="titlecontainer"><input type="text" class="title"></td>
+                    <td class="timecontainer"><input type="datetime-local" class="time"></td>
+                    <td class="idcontainer"><input type="text" class="id"></td>
+                    <td class="fincontainer"><input type="checkbox" class="fin"></td>
+                    <td class="spotlightcontainer"><input type="radio" value="1" class="spotlight" name="spotlight"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button onclick="addMatch()">Add match</button>
+        <button onclick="pushMatches()">Push matches</button>
+        <button onclick="clearMatches()">Clear matches</button>
     </body>
+    <script>
+
+        function newMatchRow(n) {
+            let clone = document.getElementById("matchrow1").cloneNode(true)
+            let matches = document.getElementsByClassName("matchrow")
+
+            if (!n) {
+                n = matches.length+1
+            }
+
+            clone.id=`matchrow${n}`
+
+            clone.getElementsByClassName("title")[0].value=""
+            clone.getElementsByClassName("time")[0].value=""
+            clone.getElementsByClassName("id")[0].value=""
+            clone.getElementsByClassName("fin")[0].checked=false
+
+            let cloneSpotlight = clone.getElementsByClassName("spotlight")[0]
+            cloneSpotlight.value = `${n}`
+            cloneSpotlight.checked = false
+
+            return clone
+        }
+
+        function addMatch() {
+            let matchTable = document.getElementById("matchtable")
+            clone = newMatchRow(0)
+
+            matchTable.appendChild(clone)
+        }
+
+        function clearMatches(n) {
+            let clone = newMatchRow(1)
+            let matches = document.getElementsByClassName("matchrow")
+            let matchTable = document.getElementById("matchtable")
+            const matchIds = []
+
+            for (const match of matches) {
+                matchIds.push(match.id)
+            }
+
+            for (const id of matchIds) {
+                let match = document.getElementById(id)
+                match.remove()
+            }
+
+            matchTable.appendChild(clone)
+        }
+
+        function pushMatches() {
+            nodecg.sendMessage('getMatch', `6a236c009503ca2289d618c0`);
+        }
+
+    </script>
 </html>

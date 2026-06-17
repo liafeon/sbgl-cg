@@ -19,7 +19,7 @@
             {
                 "name": "match-dash",
                 "title": "Matches",
-                "width": 5,
+                "width": 6,
                 "file": "dashboard.html",
                 "headerColor": "#525F78"
             }
