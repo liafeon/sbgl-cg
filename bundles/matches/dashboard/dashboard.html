@@ -102,7 +102,28 @@
         }
 
         function pushMatches() {
-            nodecg.sendMessage('getMatch', `6a236c009503ca2289d618c0`);
+            const matches = []
+            let matchRows = document.getElementsByClassName("matchrow")
+
+            for (matchRow of matchRows) {
+                match = {
+                    id: "",
+                    title: "",
+                    time: "",
+                    finalized: false,
+                    spotlight: false
+                }
+                match.title = matchRow.getElementsByClassName("title")[0].value
+                match.time = matchRow.getElementsByClassName("time")[0].value
+                match.id = matchRow.getElementsByClassName("id")[0].value
+                match.finalized = matchRow.getElementsByClassName("fin")[0].checked
+                match.spotlight = matchRow.getElementsByClassName("spotlight")[0].checked
+
+                if (match.id) {
+                    matches.push(match)
+                }
+            }
+            nodecg.sendMessage('pushMatches', matches);
         }
 
     </script>

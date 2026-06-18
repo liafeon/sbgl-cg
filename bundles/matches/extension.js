@@ -1,12 +1,12 @@
 module.exports = nodecg => {
     const secrets = nodecg.bundleConfig.secrets
 
-    const matchesRep = nodecg.Replicant("matchDataRep", {
+    const matchesRep = nodecg.Replicant("matchesRep", {
         defaultValue: {
             matches: [
                 {
-                    gameTitle: "",
-                    gameTime: 0,
+                    title: "",
+                    time: 0,
                     finalized: false,
                     players: [
                         {
@@ -22,10 +22,10 @@ module.exports = nodecg => {
         persistent: true
     });
 
-    const singleMatchDataRep = nodecg.Replicant("singleMatchDataRep", {
+    const singleMatchRep = nodecg.Replicant("singleMatchRep", {
         defaultValue: {
-            gameTitle: "",
-            gameTime: 0,
+            title: "",
+            time: 0,
             finalized: false,
             players: [
                 {
@@ -39,7 +39,9 @@ module.exports = nodecg => {
         persistent: true
     })
 
-    nodecg.listenFor('getMatch', async matchId => {
+    nodecg.listenFor('pushMatches', async matches => {
+
+        let matchesRepJson = []
 
         let jwt;
 
@@ -48,7 +50,7 @@ module.exports = nodecg => {
             "password": secrets.supabase_password
         })
 
-        fetch(`https://rirhcdkwgrjwyktqffby.supabase.co/auth/v1/token?grant_type=password`, {
+        supabaseAuthResponse = await fetch(`https://rirhcdkwgrjwyktqffby.supabase.co/auth/v1/token?grant_type=password`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -56,35 +58,58 @@ module.exports = nodecg => {
             },
             body: getJwtBody
         })
-        .then(response => response.json())
-        .then(data => {
-            jwt=data.access_token
-            console.log(jwt)
+        supabaseAuth = await supabaseAuthResponse.json()
+        jwt = supabaseAuth.access_token
 
-            fetch(`https://sbgleague.base44.app/api/entities/MatchEntry?q={"match_id":"${matchId}"}&sort_by=finish_position`, {
+        for (match of matches) {
+
+            let matchJson = {
+                title: match.title,
+                time: match.time,
+                finalized: match.finalized,
+                players: []
+            }
+
+            matchResponse = await fetch(`https://sbgleague.base44.app/api/entities/MatchEntry?q={"match_id":"${match.id}"}&sort_by=finish_position`, {
                 headers: {
                     'Accept': 'application/json',
                     // 'Authorization': `Bearer ${jwt}`,
                     'api_key': secrets.sbgl_legacy_apikey
                 }
             })
-            .then(response => response.json())
-            .then(data => {
-                for (entry of data) {
-                    console.log(entry)
-                    fetch(`https://sbgleague.base44.app/api/entities/Player/${entry.player_id}`, {
-                        headers: {
-                            'Accept': 'application/json',
-                            // 'Authorization': `Bearer ${jwt}`,
-                            'api_key': secrets.sbgl_legacy_apikey
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {console.log(data)})
-                }
-            })
-        })
 
+            match2 = await matchResponse.json()
+
+            for (entry of match2) {
+
+                let playerJson = {
+                    flag: "",
+                    name: "",
+                    diff: entry.over_under,
+                    score: entry.adjusted_match_score
+                }
+
+                playerResponse = await fetch(`https://sbgleague.base44.app/api/entities/Player/${entry.player_id}`, {
+                    headers: {
+                        'Accept': 'application/json',
+                        // 'Authorization': `Bearer ${jwt}`,
+                        'api_key': secrets.sbgl_legacy_apikey
+                    }
+                })
+                player = await playerResponse.json()
+
+                playerJson.flag=player.region
+                playerJson.name=player.ign
+
+                matchJson.players.push(playerJson)
+
+            }
+
+            matchesRepJson.push(matchJson)
+
+        }
+
+        matchesRep.value.matches = matchesRepJson
     })
 }
 
