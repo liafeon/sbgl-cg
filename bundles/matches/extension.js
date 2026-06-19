@@ -8,6 +8,7 @@ module.exports = nodecg => {
                     title: "",
                     time: 0,
                     finalized: false,
+                    spotlight: true,
                     players: [
                         {
                             flag: "",
@@ -21,23 +22,6 @@ module.exports = nodecg => {
         },
         persistent: true
     });
-
-    const singleMatchRep = nodecg.Replicant("singleMatchRep", {
-        defaultValue: {
-            title: "",
-            time: 0,
-            finalized: false,
-            players: [
-                {
-                    flag: "",
-                    name: "",
-                    diff: 0,
-                    score: 0
-                }
-            ]
-        },
-        persistent: true
-    })
 
     nodecg.listenFor('pushMatches', async matches => {
 
@@ -67,6 +51,7 @@ module.exports = nodecg => {
                 title: match.title,
                 time: match.time,
                 finalized: match.finalized,
+                spotlight: match.spotlight,
                 players: []
             }
 
@@ -98,8 +83,8 @@ module.exports = nodecg => {
                 })
                 player = await playerResponse.json()
 
-                playerJson.flag=player.region
-                playerJson.name=player.ign
+                playerJson.flag=player.region ? player.region : ""
+                playerJson.name=player.ign ? player.ign : "Not Found"
 
                 matchJson.players.push(playerJson)
 

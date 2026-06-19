@@ -27,49 +27,49 @@
                 </div>
                 <div id="row2" class="row">
                     <div id="row2pos" class="pos rowpos"><span>2</span></div>
-                    <div id="row1nationality" class="nationality rownationality"><img src="https://flagsapi.com/US/flat/64.png"></div>
+                    <div id="row2nationality" class="nationality rownationality"><img src="https://flagsapi.com/US/flat/64.png"></div>
                     <div id="row2player" class="player rowplayer"><span>Washbura</span></div>
                     <div id="row2diff" class="diff rowdiff"><span>-16</span></div>
                     <div id="row2score" class="score rowscore"><span>1775</span></div>
                 </div>
                 <div id="row3" class="row">
                     <div id="row3pos" class="pos rowpos"><span>3</span></div>
-                    <div id="row1nationality" class="nationality rownationality"><img src="https://flagsapi.com/US/flat/64.png"></div>
+                    <div id="row3nationality" class="nationality rownationality"><img src="https://flagsapi.com/US/flat/64.png"></div>
                     <div id="row3player" class="player rowplayer"><span>dkgaming219</span></div>
                     <div id="row3diff" class="diff rowdiff"><span>-17</span></div>
                     <div id="row3score" class="score rowscore"><span>1710</span></div>
                 </div>
                 <div id="row4" class="row">
                     <div id="row4pos" class="pos rowpos"><span>4</span></div>
-                    <div id="row1nationality" class="nationality rownationality"><img src="https://flagsapi.com/US/flat/64.png"></div>
+                    <div id="row4nationality" class="nationality rownationality"><img src="https://flagsapi.com/US/flat/64.png"></div>
                     <div id="row4player" class="player rowplayer"><span>Charlie Kirk</span></div>
                     <div id="row4diff" class="diff rowdiff"><span>-12</span></div>
                     <div id="row4score" class="score rowscore"><span>1660</span></div>
                 </div>
                 <div id="row5" class="row">
                     <div id="row5pos" class="pos rowpos"><span>5</span></div>
-                    <div id="row1nationality" class="nationality rownationality"><img src="https://flagsapi.com/NL/flat/64.png"></div>
+                    <div id="row5nationality" class="nationality rownationality"><img src="https://flagsapi.com/NL/flat/64.png"></div>
                     <div id="row5player" class="player rowplayer"><span>Mehexo</span></div>
                     <div id="row5diff" class="diff rowdiff"><span>-17</span></div>
                     <div id="row5score" class="score rowscore"><span>1620</span></div>
                 </div>
                 <div id="row6" class="row">
                     <div id="row6pos" class="pos rowpos"><span>6</span></div>
-                    <div id="row1nationality" class="nationality rownationality"><img src="https://flagsapi.com/US/flat/64.png"></div>
+                    <div id="row6nationality" class="nationality rownationality"><img src="https://flagsapi.com/US/flat/64.png"></div>
                     <div id="row6player" class="player rowplayer"><span>Phantorune</span></div>
                     <div id="row6diff" class="diff rowdiff"><span>-19</span></div>
                     <div id="row6score" class="score rowscore"><span>1580</span></div>
                 </div>
                 <div id="row7" class="row">
                     <div id="row7pos" class="pos rowpos"><span>7</span></div>
-                    <div id="row1nationality" class="nationality rownationality"><img src="https://flagsapi.com/US/flat/64.png"></div>
+                    <div id="row7nationality" class="nationality rownationality"><img src="https://flagsapi.com/US/flat/64.png"></div>
                     <div id="row7player" class="player rowplayer"><span>ThirstyWench</span></div>
                     <div id="row7diff" class="diff rowdiff"><span>-6</span></div>
                     <div id="row7score" class="score rowscore"><span>1415</span></div>
                 </div>
                 <div id="row8" class="row">
                     <div id="row8pos" class="pos rowpos"><span>8</span></div>
-                    <div id="row1nationality" class="nationality rownationality"><img src="https://flagsapi.com/NL/flat/64.png"></div>
+                    <div id="row8nationality" class="nationality rownationality"><img src="https://flagsapi.com/NL/flat/64.png"></div>
                     <div id="row8player" class="player rowplayer"><span>Zyliqx</span></div>
                     <div id="row8diff" class="diff rowdiff"><span>+3</span></div>
                     <div id="row8score" class="score rowscore"><span>1350</span></div>
@@ -77,4 +77,49 @@
             </div>
         </div>
     </body>
+    <script>
+        const matchesRep = nodecg.Replicant("matchesRep")
+
+        function updateMatchInfo() {
+
+            for (match of matchesRep.value.matches) {
+                if (!match.spotlight) {
+                    continue
+                }
+
+                document.getElementById("subtitle").children[0].innerHTML = match.title
+
+                for (let n = 0; n < 8; n++) {
+
+                    if (n >= match.players.length) {
+                        document.getElementById(`row${n+1}`).style.display = "none"
+                        continue
+                    }
+
+                    player = match.players[n]
+
+                    nat = document.getElementById(`row${n+1}nationality`).children[0]
+                    if (player.flag) {
+                        console.log(player.flag)
+                        nat.src = `https://flagsapi.com/${player.flag}/flat/64.png`
+                        nat.style.display = "block"
+                    } else {
+                        nat.style.display = "none"
+                    }
+                    document.getElementById(`row${n+1}player`).children[0].innerHTML = player.name
+                    document.getElementById(`row${n+1}diff`).children[0].innerHTML = player.diff
+                    document.getElementById(`row${n+1}score`).children[0].innerHTML = player.score
+
+                    document.getElementById(`row${n+1}`).style.display = "block"
+                }
+            }
+
+        }
+
+        NodeCG.waitForReplicants(matchesRep).then(() => {
+            updateMatchInfo();
+
+            matchesRep.on("change", updateMatchInfo);
+        });
+    </script>
 </html>
