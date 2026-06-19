@@ -119,7 +119,7 @@
                 match.finalized = matchRow.getElementsByClassName("fin")[0].checked
                 match.spotlight = matchRow.getElementsByClassName("spotlight")[0].checked
 
-                if (match.id) {
+                if (match.title && match.time) {
                     matches.push(match)
                 }
             }

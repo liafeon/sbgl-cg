@@ -11,16 +11,16 @@
             <div id="nextlobbycontainer">
                 <div id="nextlobby">Next Lobby</div>
                 <div id="nextlobbyplayerscol1" class="nextlobbyplayercol">
-                    <div id="nextlobbyplayer1" class="nextlobbyplayer">Kaosys</div>
-                    <div id="nextlobbyplayer3" class="nextlobbyplayer">dkgaming219</div>
-                    <div id="nextlobbyplayer5" class="nextlobbyplayer">Mehexo</div>
-                    <div id="nextlobbyplayer7" class="nextlobbyplayer">ThirstyWench</div>
+                    <div id="nextlobbyplayer2" class="nextlobbyplayer">Kaosys</div>
+                    <div id="nextlobbyplayer4" class="nextlobbyplayer">dkgaming219</div>
+                    <div id="nextlobbyplayer6" class="nextlobbyplayer">Mehexo</div>
+                    <div id="nextlobbyplayer8" class="nextlobbyplayer">ThirstyWench</div>
                 </div>
                 <div id="nextlobbyplayerscol2" class="nextlobbyplayercol">
-                    <div id="nextlobbyplayer2" class="nextlobbyplayer">Washbura</div>
-                    <div id="nextlobbyplayer4" class="nextlobbyplayer">Charliek</div>
-                    <div id="nextlobbyplayer6" class="nextlobbyplayer">Phantorune</div>
-                    <div id="nextlobbyplayer8" class="nextlobbyplayer">Zyliqx</div>
+                    <div id="nextlobbyplayer1" class="nextlobbyplayer">Washbura</div>
+                    <div id="nextlobbyplayer3" class="nextlobbyplayer">Charliek</div>
+                    <div id="nextlobbyplayer5" class="nextlobbyplayer">Phantorune</div>
+                    <div id="nextlobbyplayer7" class="nextlobbyplayer">Zyliqx</div>
                 </div>
             </div>
             <div id="match1container" class="matchcontainer">
@@ -37,4 +37,84 @@
             </div>
         </div>
     </body>
+    <script>
+        const matchesRep = nodecg.Replicant("matchesRep")
+
+        function dateTimeToHHMM(dt) {
+            return dt.split('T')[1].substring(0, 5);
+        }
+
+        function updateMatchInfo() {
+            let setMatchList = false
+            for (let i = 0; i < matchesRep.value.matches.length; i++) {
+
+                match = matchesRep.value.matches[i]
+
+                if (i+3 == matchesRep.value.matches.length || (matchesRep.value.matches.length < 3 && i == 0)) {
+
+                    match2 = i+1 < matchesRep.value.matches.length ? matchesRep.value.matches[i+1] : false
+                    match3 = i+2 < matchesRep.value.matches.length ? matchesRep.value.matches[i+2] : false
+
+                    document.getElementById(`match1time`).innerHTML = dateTimeToHHMM(match.time) + " ET"
+                    document.getElementById(`match1name`).innerHTML = match.title
+                    if (match2) {
+                        document.getElementById(`match2time`).innerHTML = dateTimeToHHMM(match2.time) + " ET"
+                        document.getElementById(`match2name`).innerHTML = match2.title
+                        document.getElementById(`match2container`).style.display = "block"
+                    } else {
+                        document.getElementById(`match2container`).style.display = "none"
+                    }
+                    if (match3) {
+                        document.getElementById(`match3time`).innerHTML = dateTimeToHHMM(match3.time) + " ET"
+                        document.getElementById(`match3name`).innerHTML = match3.title
+                        document.getElementById(`match3container`).style.display = "block"
+                    } else {
+                        document.getElementById(`match3container`).style.display = "none"
+                    }
+
+                    setMatchList = true
+
+                }
+
+                if (match.finalized) {
+                    continue
+                }
+
+                for (let n = 0; n < 8; n++) {
+
+                    if (n >= match.players.length) {
+                        document.getElementById(`nextlobbyplayer${n+1}`).style.display = "none"
+                        continue
+                    }
+
+                    player = match.players[n]
+                    document.getElementById(`nextlobbyplayer${n+1}`).innerHTML = player.name
+                    document.getElementById(`nextlobbyplayer${n+1}`).style.display = "block"
+
+                }
+
+                if (!setMatchList) {
+
+                    match2 = i+1 < matchesRep.value.matches.length ? matchesRep.value.matches[i+1] : match
+                    match3 = i+2 < matchesRep.value.matches.length ? matchesRep.value.matches[i+2] : match
+
+                    document.getElementById(`match1time`).innerHTML = match.time + " ET"
+                    document.getElementById(`match1name`).innerHTML = match.title
+                    document.getElementById(`match2time`).innerHTML = match2.time + " ET"
+                    document.getElementById(`match2name`).innerHTML = match2.title
+                    document.getElementById(`match3time`).innerHTML = match3.time + " ET"
+                    document.getElementById(`match3name`).innerHTML = match3.title
+                }
+
+                break
+            }
+        }
+
+        NodeCG.waitForReplicants(matchesRep).then(() => {
+            updateMatchInfo();
+
+            matchesRep.on("change", updateMatchInfo);
+        });
+
+    </script>
 </html>

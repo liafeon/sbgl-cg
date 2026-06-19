@@ -1,3 +1,5 @@
+const { match } = require("effect/Option");
+
 module.exports = nodecg => {
     const secrets = nodecg.bundleConfig.secrets
 
@@ -53,6 +55,11 @@ module.exports = nodecg => {
                 finalized: match.finalized,
                 spotlight: match.spotlight,
                 players: []
+            }
+
+            if (!match.id) {
+                matchesRepJson.push(matchJson)
+                continue
             }
 
             matchResponse = await fetch(`https://sbgleague.base44.app/api/entities/MatchEntry?q={"match_id":"${match.id}"}&sort_by=finish_position`, {
