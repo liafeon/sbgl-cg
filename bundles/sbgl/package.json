@@ -1,5 +1,5 @@
 {
-    "name": "matches",
+    "name": "sbgl",
     "version": "0.0.0",
     "nodecg": {
         "compatibleRange": "^2.6.4", 
@@ -13,14 +13,26 @@
                 "file": "singlematchresult/singlematchresult.html",
                 "width": 1200,
                 "height": 930
+            },
+            {
+                "file": "newsticker/newsticker.html",
+                "width": 1920,
+                "height": 270
             }
         ],
         "dashboardPanels": [
             {
-                "name": "match-dash",
+                "name": "matches-dash",
                 "title": "Matches",
                 "width": 6,
-                "file": "dashboard.html",
+                "file": "matches.html",
+                "headerColor": "#525F78"
+            },
+            {
+                "name": "newsticker-dash",
+                "title": "News Ticker",
+                "width": 5,
+                "file": "newsticker.html",
                 "headerColor": "#525F78"
             }
         ]
