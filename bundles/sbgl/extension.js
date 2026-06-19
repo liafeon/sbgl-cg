@@ -25,6 +25,20 @@ module.exports = nodecg => {
         persistent: true
     });
 
+    const casterRep = nodecg.Replicant("casterRep", {
+        defaultValue: {
+            left: {
+                name: "",
+                pronouns: ""
+            },
+            right: {
+                name: "",
+                pronouns: ""
+            }
+        },
+        persistent: true
+    });
+
     nodecg.listenFor('pushMatches', async matches => {
 
         let matchesRepJson = []
@@ -102,6 +116,12 @@ module.exports = nodecg => {
         }
 
         matchesRep.value.matches = matchesRepJson
+    })
+
+    nodecg.listenFor('pushCasters', async casters => {
+        console.log("hi")
+        casterRep.value = casters
+
     })
 }
 

@@ -28,6 +28,11 @@
                 "file": "default-background/background.html",
                 "width": 1920,
                 "height": 1080
+            },
+            {
+                "file": "desk/desk.html",
+                "width": 1786,
+                "height": 630
             }
         ],
         "dashboardPanels": [
@@ -44,6 +49,14 @@
                 "width": 5,
                 "file": "newsticker.html",
                 "headerColor": "#525F78"
+            },
+            {
+                "name": "casters-dash",
+                "title": "Commentator Ticker",
+                "width": 4,
+                "file": "commentators.html",
+                "headerColor": "#525F78"
+
             }
         ]
     }

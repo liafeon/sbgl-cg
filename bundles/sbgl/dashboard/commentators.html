@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Pronouns</th>
+            </tr>
+            <tr>
+                <td>Caster Left</td>
+                <td><input type="text" id="leftname"></td>
+                <td><input type="text" id="leftpronouns"></td>
+            </tr>
+            <tr>
+                <td>Caster Right</td>
+                <td><input type="text" id="rightname"></td>
+                <td><input type="text" id="rightpronouns"></td>
+            </tr>
+        </table><br>
+        <button id="update" onclick="updateCasterRep()">Update</button> <button id="reset" onclick="clearCasters()">Reset</button>
+    </body>
+    <script>
+        const casterRep = nodecg.Replicant("casterRep")
+
+        function clearCasters() {
+            document.getElementById("leftname").value = "";
+            document.getElementById("leftpronouns").value = "";
+            document.getElementById("rightname").value = "";
+            document.getElementById("rightpronouns").value = "";
+        }
+
+        function updateCasterRep() {
+            const casters = {
+                left: {
+                    name: document.getElementById("leftname").value,
+                    pronouns: document.getElementById("leftpronouns").value
+                },
+                right: {
+                    name: document.getElementById("rightname").value,
+                    pronouns: document.getElementById("rightpronouns").value
+                }
+            }
+
+        nodecg.sendMessage('pushCasters', casters);
+        }
+
+    </script>
+</html>

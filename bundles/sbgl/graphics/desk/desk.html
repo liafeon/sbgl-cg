@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="desk.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik+Dirt&display=swap">
+    </head>
+    <body>
+        <div id="maincontainer">
+            <div class="casterbox" id="casterleft">
+                <div class="castername" id="casternameleft">Liafeon</div>
+                <div class="casterinfo" id="casterinfoleft">She/Her</div>
+            </div>
+            <div class="casterbox" id="casterright">
+                <div class="castername" id="casternameright">ThirstyWench</div>
+                <div class="casterinfo" id="casterinforight">He/Him</div>
+            </div>
+        </div>
+	<script>
+        const casterRep = nodecg.Replicant("casterRep");
+
+        function updateCasterInfo() {
+            document.getElementById("casternameleft").innerHTML = casterRep.value.left.name
+            document.getElementById("casterinfoleft").innerHTML = casterRep.value.left.pronouns
+            document.getElementById("casternameright").innerHTML = casterRep.value.right.name
+            document.getElementById("casterinforight").innerHTML = casterRep.value.right.pronouns
+        }
+
+        NodeCG.waitForReplicants(casterRep).then(() => {
+            updateCasterInfo();
+
+            casterRep.on("change", updateCasterInfo);
+        });
+    </script>
+    </body>
+</html>
