@@ -37,7 +37,19 @@ module.exports = nodecg => {
             }
         },
         persistent: true
-    });
+	});
+
+	const newsTicker = nodecg.Replicant("newsTicker", {
+		defaultValue: {
+			streamTitle: "",
+			headline: "",
+			countdownState: "",
+			countdownTime: "",
+			ticker: [
+			]
+		},
+		persistent: true
+	});
 
     nodecg.listenFor('pushMatches', async matches => {
 
@@ -122,6 +134,12 @@ module.exports = nodecg => {
         console.log("hi")
         casterRep.value = casters
 
-    })
+	})
+
+	nodecg.listenFor('updateTicker', async ticker => {
+		console.log("hi")
+		newsTicker.value = ticker
+
+	})
 }
 

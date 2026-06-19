@@ -3,29 +3,24 @@
 <head>
 </head>
 <body>
-<form id="updateTitle">
 	<label for="streamTitle">Stream Title</label>
-	<input id="streamTitle">
-	<button type="submit">Update</button> <br><br>
+	<input id="streamTitle"><br>
 
 	<label for="headline">Headline</label>
-	<input id="Headline">
-	<button type="submit">Update</button> <br><br>
+	<input id="Headline"><br>
 
 	<label for="countdownState">Countdown Type:</label>
 	<select name="state">
 		<option value="start">Starting In</option>
 		<option value="afk">Back In</option>
 		<option value="end">Ending Soon</option>
-	</select>
-	<input type="submit" value="Submit"> <br><br>
+	</select><br>
 
 	<label for="countdownTime">Target Time:</label>
-	<input type="datetime-local">
-	<input type="submit">
+	<input type="datetime-local"><br>
 
 	<br><br>
-	<label for="ticker">News Ticker</label> <br>
+	<label for="newsTicker">News Ticker</label> <br>
 	<input id="ticker1"> <br>
 	<input id="ticker2"> <br>
 	<input id="ticker3"> <br>
@@ -33,13 +28,24 @@
 	<input id="ticker5"> <br>
 	<input id="ticker6"> <br>
 	<input id="ticker7"> <br>
-	<input id="ticker8"> <br>
-	<button type="submit">Update</button>
-
-
-</form>
-<script>
-	
-</script>
+	<input id="ticker8"> <br><br>
+	<button id="update" onclick="updateNewsTicker()">Save Settings</button>
 </body>
+<script>
+	const newsTicker = nodecg.Replicant("newsTicker")
+
+	function updateNewsTicker() {
+		const ticker = {
+			streamTitle: document.getElementById("streamTitle").value,
+			headline: document.getElementById("Headline").value,
+			countdownState: document.getElementById("state").value,
+			countdownTime: document.getElementById("datetime-local").value
+			for ()
+		}
+		console.log (ticker)
+
+
+	nodecg.sendMessage('updateTicker', ticker);
+	}
+</script>
 </html>
