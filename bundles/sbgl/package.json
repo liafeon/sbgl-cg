@@ -18,6 +18,16 @@
                 "file": "newsticker/newsticker.html",
                 "width": 1920,
                 "height": 270
+            },
+            {
+                "file": "newsticker/newsticker-desk.html",
+                "width": 1920,
+                "height": 270
+            },
+            {
+                "file": "default-background/background.html",
+                "width": 1920,
+                "height": 1080
             }
         ],
         "dashboardPanels": [

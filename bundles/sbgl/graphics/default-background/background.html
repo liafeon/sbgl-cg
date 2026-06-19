@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                position: absolute;
+                overflow: hidden;
+                margin: 0;
+                border: 0;
+                padding: 0;
+            }
+
+            #maincontainer {
+                width: 1995px;
+                height: 1105px;
+                background-image: url("./bg.png");
+                animation: shuffle 10s linear infinite;
+            }
+            @keyframes shuffle {
+                0% {
+                    transform: translate3d(0, 0, 0);
+                }
+                100% {
+                    transform: translate3d(-75px, -25px, 0);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="maincontainer"></div>
+    </body>
+</html>
