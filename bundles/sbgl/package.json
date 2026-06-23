@@ -52,7 +52,7 @@
             },
             {
                 "name": "casters-dash",
-                "title": "Commentator Ticker",
+                "title": "Commentators",
                 "width": 4,
                 "file": "commentators.html",
                 "headerColor": "#525F78"
