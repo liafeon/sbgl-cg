@@ -16,11 +16,11 @@
 		<option value="end">Ending Soon</option>
 	</select><br>
 
-	<label id="countdownTime">Target Time:</label>
-	<input type="datetime-local"><br>
+	<label for="countdownTime">Target Time:</label>
+	<input type="datetime-local" id="countdownTime"><br>
 
 	<br><br>
-	<label for="newsTicker">News Ticker</label> <br>
+	<label for="tickerLines">News Ticker</label> <br>
 	<input id="ticker1"> <br>
 	<input id="ticker2"> <br>
 	<input id="ticker3"> <br>
@@ -31,18 +31,27 @@
 	<input id="ticker8"> <br><br>
 	<button id="update" onclick="updateNewsTicker()">Save Settings</button>
 </body>
-<script>
+<script>	
+
 	const newsTicker = nodecg.Replicant("newsTicker")
 
 	function updateNewsTicker() {
+		const tickerLines = [ticker1.value, ticker2.value, ticker3.value, ticker4.value, ticker5.value, ticker6.value, ticker7.value, ticker8.value];
+
+		let text = "";
+		for (let i = 0; i < tickerLines.length; i++) {
+			text += tickerLines[i] + "<br>";
+		}
+		console.log(tickerLines)
+
 		const ticker = {
 			streamTitle: document.getElementById("streamTitle").value,
 			headline: document.getElementById("Headline").value,
 			countdownState: document.getElementById("countdownState").value,
-			countdownTime: document.getElementById("countdownTime").value
+			countdownTime: document.getElementById("countdownTime").value,
+			tickerLines: document.getElementById("tickerLines").innerHTML.value,
 		}
-		console.log (ticker)
-
+		console.log(ticker)
 
 	nodecg.sendMessage('updateTicker', ticker);
 	}
