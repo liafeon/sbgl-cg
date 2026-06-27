@@ -10,13 +10,13 @@
 	<input id="Headline"><br>
 
 	<label for="countdownState">Countdown Type:</label>
-	<select name="state">
+	<select id="countdownState">
 		<option value="start">Starting In</option>
 		<option value="afk">Back In</option>
 		<option value="end">Ending Soon</option>
 	</select><br>
 
-	<label for="countdownTime">Target Time:</label>
+	<label id="countdownTime">Target Time:</label>
 	<input type="datetime-local"><br>
 
 	<br><br>
@@ -38,9 +38,8 @@
 		const ticker = {
 			streamTitle: document.getElementById("streamTitle").value,
 			headline: document.getElementById("Headline").value,
-			countdownState: document.getElementById("state").value,
-			countdownTime: document.getElementById("datetime-local").value
-			for ()
+			countdownState: document.getElementById("countdownState").value,
+			countdownTime: document.getElementById("countdownTime").value
 		}
 		console.log (ticker)
 
