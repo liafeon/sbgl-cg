@@ -30,4 +30,21 @@
             </div>
         </div>
     </body>
+    <script>
+        const newsTicker = nodecg.Replicant("newsTicker");
+
+        function updateNewsTicker() {
+            document.getElementById("streamtitle").innerHTML = newsTicker.value.streamTitle,
+            document.getElementById("headline").innerHTML = newsTicker.value.headline,
+            document.getElementById("countdowntitle").innerHTML = newsTicker.value.countdownState,
+            document.getElementById("countdown").innerHTML = newsTicker.value.countdownTime,
+            tickerLines
+        }
+
+        NodeCG.waitForReplicants(newsTicker).then(() => {
+            updateNewsTicker();
+
+            newsTicker.on("change", updateNewsTicker);
+        });
+    </script>
 </html>

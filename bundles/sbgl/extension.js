@@ -45,7 +45,7 @@ module.exports = nodecg => {
 			headline: "",
 			countdownState: "",
 			countdownTime: "",
-			ticker: [
+			tickerLines: [
 			]
 		},
 		persistent: true

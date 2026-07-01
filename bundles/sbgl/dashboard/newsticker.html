@@ -11,9 +11,9 @@
 
 	<label for="countdownState">Countdown Type:</label>
 	<select id="countdownState">
-		<option value="start">Starting In</option>
-		<option value="afk">Back In</option>
-		<option value="end">Ending Soon</option>
+		<option value="Starting In">Starting In</option>
+		<option value="Back In">Back In</option>
+		<option value="Ending Soon">Ending Soon</option>
 	</select><br>
 
 	<label for="countdownTime">Target Time:</label>
@@ -40,16 +40,15 @@
 
 		let text = "";
 		for (let i = 0; i < tickerLines.length; i++) {
-			text += tickerLines[i] + "<br>";
+			text += tickerLines[i];
 		}
-		console.log(tickerLines)
 
 		const ticker = {
 			streamTitle: document.getElementById("streamTitle").value,
 			headline: document.getElementById("Headline").value,
 			countdownState: document.getElementById("countdownState").value,
 			countdownTime: document.getElementById("countdownTime").value,
-			tickerLines: document.getElementById("tickerLines").innerHTML.value,
+			tickerLines: tickerLines,
 		}
 		console.log(ticker)
 
