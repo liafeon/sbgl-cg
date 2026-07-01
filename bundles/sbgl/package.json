@@ -33,6 +33,11 @@
                 "file": "desk/desk.html",
                 "width": 1786,
                 "height": 630
+            },
+            {
+                "file": "pro-series/proseriesstandings.html",
+                "width": 1680,
+                "height": 930
             }
         ],
         "dashboardPanels": [

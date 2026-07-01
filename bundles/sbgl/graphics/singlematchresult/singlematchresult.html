@@ -107,7 +107,7 @@
                         nat.style.display = "none"
                     }
                     document.getElementById(`row${n+1}player`).children[0].innerHTML = player.name
-                    document.getElementById(`row${n+1}diff`).children[0].innerHTML = player.diff
+                    document.getElementById(`row${n+1}diff`).children[0].innerHTML = (player.diff<0) ? player.diff : (player.diff==0) ? "E" : "+" + player.diff
                     document.getElementById(`row${n+1}score`).children[0].innerHTML = player.score
 
                     document.getElementById(`row${n+1}`).style.display = "block"

@@ -1,5 +1,3 @@
-const { match } = require("effect/Option");
-
 module.exports = nodecg => {
     const secrets = nodecg.bundleConfig.secrets
 
@@ -24,6 +22,17 @@ module.exports = nodecg => {
         },
         persistent: true
     });
+
+    const proSeriesRep = nodecg.Replicant("proSeriesRep", {
+        defaultValue: [
+            {
+                flag: "",
+                name: "",
+                score: 0
+            }
+        ],
+        persistent: true
+    })
 
     const casterRep = nodecg.Replicant("casterRep", {
         defaultValue: {
@@ -62,17 +71,6 @@ module.exports = nodecg => {
             "password": secrets.supabase_password
         })
 
-        supabaseAuthResponse = await fetch(`https://rirhcdkwgrjwyktqffby.supabase.co/auth/v1/token?grant_type=password`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "apikey": secrets.supabase_apikey,
-            },
-            body: getJwtBody
-        })
-        supabaseAuth = await supabaseAuthResponse.json()
-        jwt = supabaseAuth.access_token
-
         for (match of matches) {
 
             let matchJson = {
@@ -88,15 +86,16 @@ module.exports = nodecg => {
                 continue
             }
 
-            matchResponse = await fetch(`https://sbgleague.base44.app/api/entities/MatchEntry?q={"match_id":"${match.id}"}&sort_by=finish_position`, {
+            matchResponse = await fetch(`https://rirhcdkwgrjwyktqffby.supabase.co/rest/v1/match_entry?select=*&match_id=eq.${match.id}&order=finish_position.asc`, {
                 headers: {
                     'Accept': 'application/json',
-                    // 'Authorization': `Bearer ${jwt}`,
-                    'api_key': secrets.sbgl_legacy_apikey
+                    'apikey': secrets.supabase_apikey
                 }
             })
 
             match2 = await matchResponse.json()
+
+            console.log(match2)
 
             for (entry of match2) {
 
@@ -107,17 +106,20 @@ module.exports = nodecg => {
                     score: entry.adjusted_match_score
                 }
 
-                playerResponse = await fetch(`https://sbgleague.base44.app/api/entities/Player/${entry.player_id}`, {
+                playerResponse = await fetch(`https://rirhcdkwgrjwyktqffby.supabase.co/rest/v1/player?select=*&id=eq.${entry.player_id}`, {
                     headers: {
                         'Accept': 'application/json',
-                        // 'Authorization': `Bearer ${jwt}`,
-                        'api_key': secrets.sbgl_legacy_apikey
+                        'apikey': secrets.supabase_apikey
                     }
                 })
                 player = await playerResponse.json()
 
-                playerJson.flag=player.region ? player.region : ""
-                playerJson.name=player.ign ? player.ign : "Not Found"
+                console.log(player)
+
+                playerJson.flag=player[0].region ? player[0].region : ""
+                playerJson.name=player[0].ign ? player[0].ign : "Not Found"
+
+                console.log(playerJson)
 
                 matchJson.players.push(playerJson)
 
@@ -126,18 +128,22 @@ module.exports = nodecg => {
             matchesRepJson.push(matchJson)
 
         }
-
+        console.log(matchesRepJson)
         matchesRep.value.matches = matchesRepJson
     })
 
+    nodecg.listenFor('getProSeries', async _ => {
+
+    })
+
     nodecg.listenFor('pushCasters', async casters => {
-        console.log("hi")
+
         casterRep.value = casters
 
 	})
 
 	nodecg.listenFor('updateTicker', async ticker => {
-		console.log("hi")
+
 		newsTicker.value = ticker
 
 	})
