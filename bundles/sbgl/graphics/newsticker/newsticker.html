@@ -51,24 +51,40 @@
             }
 
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const minutesText = (minutes < 10) ? "0" + minutes : minutes;
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const secondsText = (seconds < 10) ? "0" + seconds : seconds;
 
             document.getElementById("countdown").textContent =
-                `${minutes}:${seconds}`;
-
-                console.log(newsTicker.value.countdownTime)
+                `${minutesText}:${secondsText}`;
         }
 
         updateCountdown();
         timerInterval = setInterval(updateCountdown, 1000);
         }
 
+        let tickerLines;
+
+		function updateLines() {
+
+			const lines = newsTicker.value.tickerLines
+			text = ""
+			clearInterval(tickerLines);
+			for (let i = 0; i < lines.length; i++) {
+				text = text + `<span>${lines[i]}</span><span>//</span>`;
+			}
+
+			document.getElementById("ticker1").innerHTML = text
+			document.getElementById("ticker2").innerHTML = text
+
+		}
+
         function updateNewsTicker() {
             document.getElementById("streamtitle").innerHTML = newsTicker.value.streamTitle,
             document.getElementById("headline").innerHTML = newsTicker.value.headline,
             document.getElementById("countdowntitle").innerHTML = newsTicker.value.countdownState,
             startCountdown();
-            tickerLines
+            updateLines();
         }
         NodeCG.waitForReplicants(newsTicker).then(() => {
             updateNewsTicker();

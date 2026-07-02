@@ -21,14 +21,15 @@
 
 	<br><br>
 	<label for="tickerLines">News Ticker</label> <br>
-	<input id="ticker1"> <br>
-	<input id="ticker2"> <br>
-	<input id="ticker3"> <br>
-	<input id="ticker4"> <br>
-	<input id="ticker5"> <br>
-	<input id="ticker6"> <br>
-	<input id="ticker7"> <br>
-	<input id="ticker8"> <br><br>
+	<input id="ticker1", input style="width: 300px;"> <br>
+	<input id="ticker2", input style="width: 300px;"> <br>
+	<input id="ticker3", input style="width: 300px;"> <br>
+	<input id="ticker3", input style="width: 300px;"> <br>
+	<input id="ticker4", input style="width: 300px;"> <br>
+	<input id="ticker5", input style="width: 300px;"> <br>
+	<input id="ticker6", input style="width: 300px;"> <br>
+	<input id="ticker7", input style="width: 300px;"> <br>
+	<input id="ticker8", input style="width: 300px;"> <br><br>
 	<button id="update" onclick="updateNewsTicker()">Save Settings</button>
 </body>
 <script>	
@@ -36,11 +37,12 @@
 	const newsTicker = nodecg.Replicant("newsTicker")
 
 	function updateNewsTicker() {
-		const tickerLines = [ticker1.value, ticker2.value, ticker3.value, ticker4.value, ticker5.value, ticker6.value, ticker7.value, ticker8.value];
 
-		let text = "";
-		for (let i = 0; i < tickerLines.length; i++) {
-			text += tickerLines[i];
+		let tickerLines = [];
+		for (let i = 1; i < 9; i++) {
+			if (document.getElementById(`ticker${i}`).value != "") {
+				tickerLines.push(document.getElementById(`ticker${i}`).value);
+			}
 		}
 
 		const ticker = {
