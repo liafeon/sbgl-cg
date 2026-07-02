@@ -31,16 +31,45 @@
         </div>
     </body>
     <script>
+        let timerInterval;
+
         const newsTicker = nodecg.Replicant("newsTicker");
+
+        function startCountdown() {
+            clearInterval(timerInterval);
+
+            const targetTime = new Date(newsTicker.value.countdownTime).getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetTime - now;
+
+            if (distance <= 0) {
+                document.getElementById("countdown").textContent = "Go!";
+                clearInterval(timerInterval);
+                return;
+            }
+
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").textContent =
+                `${minutes}:${seconds}`;
+
+                console.log(newsTicker.value.countdownTime)
+        }
+
+        updateCountdown();
+        timerInterval = setInterval(updateCountdown, 1000);
+        }
 
         function updateNewsTicker() {
             document.getElementById("streamtitle").innerHTML = newsTicker.value.streamTitle,
             document.getElementById("headline").innerHTML = newsTicker.value.headline,
             document.getElementById("countdowntitle").innerHTML = newsTicker.value.countdownState,
-            document.getElementById("countdown").innerHTML = newsTicker.value.countdownTime,
+            startCountdown();
             tickerLines
         }
-
         NodeCG.waitForReplicants(newsTicker).then(() => {
             updateNewsTicker();
 
