@@ -38,6 +38,11 @@
                 "file": "pro-series/proseriesstandings.html",
                 "width": 1680,
                 "height": 930
+            },
+            {
+                "file": "carousel/carousel.html",
+                "width": 1680,
+                "height": 930
             }
         ],
         "dashboardPanels": [

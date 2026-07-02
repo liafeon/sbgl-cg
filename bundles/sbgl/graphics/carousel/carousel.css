@@ -1,0 +1,96 @@
+body {
+    font-family: "Bebas Neue";
+    color: #303030;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+div, iframe {
+    position: absolute;
+}
+
+#maincontainer {
+    left: 0px;
+    top: 0px;
+    width: 1920px;
+    height: 1080px;
+}
+
+.framecontainer {
+    left: 0px;
+    top: 0px;
+    width: 1920px;
+    height: 1080px;
+}
+
+#matchcontainer {
+    animation: slide 30s linear infinite;
+}
+
+@keyframes slide {
+    0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    45% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    50% {
+        transform: translate3d(-100%, 0, 0);
+        opacity: 0;
+    }
+    95% {
+        transform: translate3d(100%, 0, 0);
+        opacity: 0;
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+#proseriescontainer {
+    animation: slide2 30s linear infinite;
+}
+
+@keyframes slide2 {
+    0% {
+        transform: translate3d(100%, 0, 0);
+        opacity: 0;
+    }
+    45% {
+        transform: translate3d(100%, 0, 0);
+        opacity: 0;
+    }
+    50% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    95% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(-100%, 0, 0);
+        opacity: 0;
+    }
+}
+
+#match {
+    top: 30px;
+    left: 360px;
+    width: 1200px;
+    height: 930px;
+}
+
+#proseries {
+    top: 30px;
+    left: 120px;
+    width: 1680px;
+    height: 930px;
+    margin-left: auto;
+    margin-right: auto;
+}
