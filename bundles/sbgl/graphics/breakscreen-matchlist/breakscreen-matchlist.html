@@ -41,7 +41,18 @@
         const matchesRep = nodecg.Replicant("matchesRep")
 
         function dateTimeToHHMM(dt) {
-            return dt.split('T')[1].substring(0, 5);
+            let t = new Date(dt).toLocaleTimeString('en-US', {
+                    timeZone: 'America/New_York'
+                }).getTime()
+            console.log(t)
+
+            let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+
+            let hoursText = (hours < 10) ? "0"+hours : hours
+            let minutesText = (minutes < 10) ? "0"+minutes : minutes
+
+            return `${hoursText}:${minutesText}`
         }
 
         function updateMatchInfo() {
@@ -49,6 +60,7 @@
             for (let i = 0; i < matchesRep.value.matches.length; i++) {
 
                 match = matchesRep.value.matches[i]
+                console.log("hi")
 
                 if (i+3 == matchesRep.value.matches.length || (matchesRep.value.matches.length < 3 && i == 0)) {
 
@@ -98,15 +110,16 @@
                     match2 = i+1 < matchesRep.value.matches.length ? matchesRep.value.matches[i+1] : match
                     match3 = i+2 < matchesRep.value.matches.length ? matchesRep.value.matches[i+2] : match
 
-                    document.getElementById(`match1time`).innerHTML = match.time + " ET"
+                    document.getElementById(`match1time`).innerHTML = dateTimeToHHMM(match.time) + " ET"
                     document.getElementById(`match1name`).innerHTML = match.title
-                    document.getElementById(`match2time`).innerHTML = match2.time + " ET"
+                    document.getElementById(`match2time`).innerHTML = dateTimeToHHMM(match2.time) + " ET"
                     document.getElementById(`match2name`).innerHTML = match2.title
-                    document.getElementById(`match3time`).innerHTML = match3.time + " ET"
+                    document.getElementById(`match3time`).innerHTML = dateTimeToHHMM(match3.time) + " ET"
                     document.getElementById(`match3name`).innerHTML = match3.title
                 }
 
                 break
+
             }
         }
 

@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<style>
+		.tickerline {
+			width: 600px;
+		}
+	</style>
 </head>
 <body>
 	<label for="streamTitle">Stream Title</label>
@@ -16,20 +21,19 @@
 		<option value="Ending Soon">Ending Soon</option>
 	</select><br>
 
-	<label for="countdownTime">Target Time:</label>
+	<label for="countdownTime">Target Time (ET):</label>
 	<input type="datetime-local" id="countdownTime"><br>
 
 	<br><br>
 	<label for="tickerLines">News Ticker</label> <br>
-	<input id="ticker1", input style="width: 300px;"> <br>
-	<input id="ticker2", input style="width: 300px;"> <br>
-	<input id="ticker3", input style="width: 300px;"> <br>
-	<input id="ticker3", input style="width: 300px;"> <br>
-	<input id="ticker4", input style="width: 300px;"> <br>
-	<input id="ticker5", input style="width: 300px;"> <br>
-	<input id="ticker6", input style="width: 300px;"> <br>
-	<input id="ticker7", input style="width: 300px;"> <br>
-	<input id="ticker8", input style="width: 300px;"> <br><br>
+	<input id="ticker1" class="tickerline"> <br>
+	<input id="ticker2" class="tickerline"> <br>
+	<input id="ticker3" class="tickerline"> <br>
+	<input id="ticker4" class="tickerline"> <br>
+	<input id="ticker5" class="tickerline"> <br>
+	<input id="ticker6" class="tickerline"> <br>
+	<input id="ticker7" class="tickerline"> <br>
+	<input id="ticker8" class="tickerline"> <br><br>
 	<button id="update" onclick="updateNewsTicker()">Save Settings</button>
 </body>
 <script>	

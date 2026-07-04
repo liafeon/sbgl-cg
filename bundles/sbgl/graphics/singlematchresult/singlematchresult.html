@@ -82,6 +82,10 @@
 
         function updateMatchInfo() {
 
+            for (let n = 0; n < 8; n++) {
+                document.getElementById(`row${n+1}`).style.display = "none"
+            }
+
             for (match of matchesRep.value.matches) {
                 if (!match.spotlight) {
                     continue
