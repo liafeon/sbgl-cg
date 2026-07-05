@@ -41,9 +41,7 @@
         const matchesRep = nodecg.Replicant("matchesRep")
 
         function dateTimeToHHMM(dt) {
-            let t = new Date(dt).toLocaleTimeString('en-US', {
-                    timeZone: 'America/New_York'
-                }).getTime()
+            let t = new Date(dt).getTime()
             console.log(t)
 
             let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
