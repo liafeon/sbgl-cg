@@ -38,14 +38,10 @@
         function startCountdown() {
             clearInterval(timerInterval);
 
-            const targetTime = new Date(newsTicker.value.countdownTime).toLocaleTimeString('en-US', {
-                    timeZone: 'America/New_York'
-                }).getTime();
+            const targetTime = new Date(newsTicker.value.countdownTime).getTime();
 
         function updateCountdown() {
-            const now = new Date().toLocaleTimeString('en-US', {
-                    timeZone: 'America/New_York'
-                }).getTime();
+            const now = new Date().getTime();
             const distance = targetTime - now;
 
             if (distance <= 0) {
