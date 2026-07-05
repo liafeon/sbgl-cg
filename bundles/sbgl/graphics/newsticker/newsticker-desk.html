@@ -31,6 +31,8 @@
         </div>
     </body>
     <script>
+        const newsTicker = nodecg.Replicant("newsTicker");
+
         function setClock() {
             const element = document.getElementById("countdown");
 
@@ -47,6 +49,31 @@
             updateTime(); // Display immediately
             setInterval(updateTime, 1000); // Update every second
         }
+
+        function updateLines() {
+
+			const lines = newsTicker.value.tickerLines
+			text = ""
+			for (let i = 0; i < lines.length; i++) {
+				text = text + `<span>${lines[i]}</span><span>//</span>`;
+			}
+
+			document.getElementById("ticker1").innerHTML = text
+			document.getElementById("ticker2").innerHTML = text
+
+		}
+
+        function updateNewsTicker() {
+            document.getElementById("streamtitle").innerHTML = newsTicker.value.streamTitle,
+            document.getElementById("headline").innerHTML = newsTicker.value.headline,
+            updateLines();
+        }
+
+        NodeCG.waitForReplicants(newsTicker).then(() => {
+            updateNewsTicker();
+
+            newsTicker.on("change", updateNewsTicker);
+        });
 
         setClock()
     </script>
